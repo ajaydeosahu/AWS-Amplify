@@ -1,0 +1,23 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - export NODE_OPTIONS="--max-old-space-size=12288"
+        - cat /proc/meminfo
+        - npm i @mui/icons-material --force
+        #- npm install @mui/system --force
+        #- import { experimental_sx } from '@mui/system';
+        # - if [ "${AWS_BRANCH}" = "master" ]; then npm run install_global_components; fi
+        # - if [ "${AWS_BRANCH}" = "qa" ]; then npm run install_global_components; fi 
+        #- if [ "${AWS_BRANCH}" = "dev" ]; then npm run install_global_components; fi
+        # - if [ "${AWS_BRANCH}" = "phase-1" ]; then npm run install_global_components; fi
+        # - if [ "${AWS_BRANCH}" = "dev-exp" ]; then npm run install_global_components; fi
+        - npm install --force
+    build:
+      commands:
+        - npm run $BUILD
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
